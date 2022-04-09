@@ -1,4 +1,4 @@
-# ayabegatya
+# UmaGatya
 
 A new Flutter project.
 
