@@ -1,6 +1,6 @@
 # UmaGatya
 
-A new Flutter project.
+ガチャ画面をflutterで再現したアプリです。スマホサイズがでかすぎるもしくは小さすぎるとエラーが起きます。はい。
 
 ## Getting Started
 
