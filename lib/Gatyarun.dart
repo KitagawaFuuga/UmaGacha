@@ -5,6 +5,9 @@ import 'package:chewie/chewie.dart';
 import 'package:chewie/src/chewie_player.dart';
 
 class Rungatya extends StatefulWidget {
+  VideoPlayerController movie;
+  Rungatya({Key? key, required this.movie}) : super(key: key);
+
   @override
   _Rungatya createState() => _Rungatya();
 }
@@ -12,13 +15,13 @@ class Rungatya extends StatefulWidget {
 class _Rungatya extends State<Rungatya> {
   late VideoPlayerController _videoPlayerController;
   late ChewieController _chewieController;
-
   bool _video = true;
 
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.asset('assets/mkmi.mp4');
+
+    _videoPlayerController = widget.movie;
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
       aspectRatio: 1 / 2,
@@ -85,7 +88,7 @@ class _Rungatya extends State<Rungatya> {
             : Column(
                 children: [
                   Container(
-                    height: Widht/13,
+                    height: Widht / 13,
                     width: Widht,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -98,7 +101,8 @@ class _Rungatya extends State<Rungatya> {
                         ),
                       ],
                     ),
-                    margin: EdgeInsets.only(top: Height / 6, left: Widht / Widht/13),
+                    margin: EdgeInsets.only(
+                        top: Height / 6, left: Widht / Widht / 13),
                     child: Center(
                       child: Text(
                         'ガチャ結果',
@@ -140,56 +144,62 @@ class _Rungatya extends State<Rungatya> {
                             printimage(),
                           ])),
                   Container(
-                    margin: EdgeInsets.only(top: Widht/13),
+                    margin: EdgeInsets.only(top: Widht / 13),
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => runGatya()));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.white,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => runGatya(
+                                          movie: _videoPlayerController,
+                                        )));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                          ),
+                          child: Container(
+                            height: Widht / 8,
+                            width: Widht / 3,
+                            child: Center(
+                              child: Text(
+                                '戻る',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.brown,
+                                    fontSize: 20),
                               ),
-                              child: Container(
-                                  height: Widht/8,
-                                  width: Widht/3,
-                                  child: Center(
-                                    child: Text(
-                                      '戻る',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.brown,
-                                          fontSize: 20),
-                                    ),
-                                  ))),
-                          ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  runGatya.yuusyou -= 1500;
-                                });
-                                Dialogcome2();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.green.shade400,
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              runGatya.yuusyou -= 1500;
+                            });
+                            Dialogcome2();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green.shade400,
+                          ),
+                          child: Container(
+                            height: Widht / 8,
+                            width: Widht / 3,
+                            child: Center(
+                              child: Text(
+                                'もう一度引く',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
                               ),
-                              child: Container(
-                                  height: Widht/8,
-                                  width: Widht/3,
-                                  child: Center(
-                                    child: Text(
-                                      'もう一度引く',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                  )))
-                        ]),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -203,23 +213,22 @@ class _Rungatya extends State<Rungatya> {
     return Column(
       children: [
         Container(
-          height: Widht /5.5,
-          width: Height /8.5,
+          height: Widht / 5.5,
+          width: Height / 8.5,
           color: Colors.red,
           child: Image(
             image: AssetImage('assets/images/ios-1.jpg'),
           ),
         ),
         Container(
-          width: Widht /5,
+          width: Widht / 5,
           child: Stack(
             children: [
               Icon(
                 Icons.star,
                 color: Colors.yellow,
               ),
-              for(int i = 15; i <= 60; i += 15)
-                runIcon(i.toDouble())
+              for (int i = 15; i <= 60; i += 15) runIcon(i.toDouble())
             ],
           ),
         ),
@@ -229,9 +238,9 @@ class _Rungatya extends State<Rungatya> {
 
   Widget runIcon(double i) {
     Color color;
-    if(i <= 45){
+    if (i <= 45) {
       color = Colors.yellow;
-    }else{
+    } else {
       color = Colors.white;
     }
     return Positioned(
@@ -263,7 +272,8 @@ class _Rungatya extends State<Rungatya> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => runGatya()));
+                                builder: (context) =>
+                                    runGatya(movie: _videoPlayerController)));
                       },
                       child: Container(
                         alignment: Alignment.bottomCenter,
@@ -288,7 +298,8 @@ class _Rungatya extends State<Rungatya> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Rungatya()));
+                                builder: (context) =>
+                                    Rungatya(movie: _videoPlayerController)));
                       },
                       child: Container(
                         alignment: Alignment.bottomCenter,
@@ -305,8 +316,8 @@ class _Rungatya extends State<Rungatya> {
                 )
               ],
               content: Container(
-                height: Widht /2,
-                width: Widht/1,
+                height: Widht / 2,
+                width: Widht / 1,
                 child: Column(
                   children: [
                     Container(

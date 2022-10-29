@@ -1,6 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'Gatyascreen.dart';
-import 'Gatyarun.dart';
+import 'getmove.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: runGatya(),
+      home: MyHomePage(),
     );
   }
 }
-

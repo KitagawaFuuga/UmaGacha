@@ -51,8 +51,7 @@ class _SingleGatya extends State<SingleGatya> {
       });
     });
 
-    return Stack(
-      children: <Widget>[
+    return Stack(children: <Widget>[
       (_video)
           ? Stack(
               children: [
@@ -85,8 +84,8 @@ class _SingleGatya extends State<SingleGatya> {
             )
           : Column(children: [
               Container(
-                height: Widht/13,
-                width: Widht/1,
+                height: Widht / 13,
+                width: Widht / 1,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
@@ -98,7 +97,8 @@ class _SingleGatya extends State<SingleGatya> {
                     ),
                   ],
                 ),
-                margin: EdgeInsets.only(top: Height / 6, left: Widht / Widht/13),
+                margin:
+                    EdgeInsets.only(top: Height / 6, left: Widht / Widht / 13),
                 child: Center(
                   child: Text(
                     'ガチャ結果',
@@ -110,35 +110,45 @@ class _SingleGatya extends State<SingleGatya> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: Widht/2.5),
+                margin: EdgeInsets.only(top: Widht / 2.5),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [printimage()]),
               ),
-                Container(
-                    margin: EdgeInsets.only(top:Widht/2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(
-                          onPressed: (){
+              Container(
+                margin: EdgeInsets.only(top: Widht / 2),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
                             Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => runGatya()));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => runGatya(
+                                          movie: _videoPlayerController,
+                                        )));
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                           ),
-                          child: Container(         
-                            height: Widht/8,
-                            width: Widht/3.5,
-                            child: Center(child: Text('戻る',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.brown,fontSize: 20),),)
-                          )),
-                          ElevatedButton(
-                          onPressed: (){
+                          child: Container(
+                              height: Widht / 8,
+                              width: Widht / 3.5,
+                              child: Center(
+                                child: Text(
+                                  '戻る',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.brown,
+                                      fontSize: 20),
+                                ),
+                              ))),
+                      ElevatedButton(
+                          onPressed: () {
                             setState(() {
-                              runGatya.yuusyou -= 1500; 
+                              runGatya.yuusyou -= 1500;
                             });
                             Dialogcome2();
                           },
@@ -146,12 +156,19 @@ class _SingleGatya extends State<SingleGatya> {
                             primary: Colors.green.shade400,
                           ),
                           child: Container(
-                            height: Widht/8,
-                            width: Widht/3.5,
-                            child: Center(child: Text('もう一度引く',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),)
-                          ))
-                      ]),
-                  )
+                              height: Widht / 8,
+                              width: Widht / 3.5,
+                              child: Center(
+                                child: Text(
+                                  'もう一度引く',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                              )))
+                    ]),
+              )
             ])
     ]);
   }
@@ -162,7 +179,7 @@ class _SingleGatya extends State<SingleGatya> {
     return Column(
       children: [
         Container(
-          height: Widht /6,
+          height: Widht / 6,
           width: Widht / 4,
           color: Colors.red,
           child: Image(
@@ -211,7 +228,7 @@ class _SingleGatya extends State<SingleGatya> {
       ],
     );
   }
-  
+
   Future<void> Dialogcome2() async {
     var Height = 780;
     var Widht = 390;
@@ -232,7 +249,9 @@ class _SingleGatya extends State<SingleGatya> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => runGatya()));
+                                builder: (context) => runGatya(
+                                      movie: _videoPlayerController,
+                                    )));
                       },
                       child: Container(
                         alignment: Alignment.bottomCenter,
@@ -251,9 +270,9 @@ class _SingleGatya extends State<SingleGatya> {
                           side: BorderSide(color: Colors.black, width: 1)),
                       onPressed: () {
                         setState(() {
-                        runGatya.yuusyou -=150;
+                          runGatya.yuusyou -= 150;
                         });
-                        
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -274,13 +293,13 @@ class _SingleGatya extends State<SingleGatya> {
                 )
               ],
               content: Container(
-                height: Widht/2,
-                width: Widht/1,
+                height: Widht / 2,
+                width: Widht / 1,
                 child: Column(
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      height: Widht/10,
+                      height: Widht / 10,
                       color: Colors.green,
                       width: double.infinity,
                       child: Text('ガチャ確認',
@@ -290,7 +309,7 @@ class _SingleGatya extends State<SingleGatya> {
                               color: Colors.white)),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: Widht/5),
+                      margin: EdgeInsets.only(top: Widht / 5),
                       child: Text(
                         'ガチャを行います',
                         textAlign: TextAlign.center,
