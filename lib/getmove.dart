@@ -1,11 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'main.dart ';
 import 'package:video_player/video_player.dart';
-import 'Gatyarun.dart';
-import 'Gatyascreen.dart';
+import 'tengacha.dart';
+import 'toppage.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -30,6 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
         print('No image selected.');
       }
     });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => runGatya(movie: _videoPlayerController)),
+    );
+
   }
 
   @override
@@ -37,44 +41,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
         child: _videoPlayerController == null
-            ? Text('No image selected.')
-            : AspectRatio(
-                aspectRatio: _videoPlayerController!.value.aspectRatio,
-                // 動画を表示
-                child: VideoPlayer(_videoPlayerController!),
-              ),
+        ? const Text('No image selected.')
+        : AspectRatio(
+            aspectRatio: _videoPlayerController!.value.aspectRatio,
+            // 動画を表示
+            child: VideoPlayer(_videoPlayerController!),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _getImage();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => runGatya(movie: _videoPlayerController!),
-            ),
-          );
         },
-        child: Icon(Icons.image),
+        child: const Icon(Icons.image),
       ),
     );
   }
 }
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Get Move'),
-//       ),
-//       body: Center(
-//         child: _image == null ? Text('No image selected.') : Text(_image!.path),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: getImage,
-//         child: Icon(Icons.add_a_photo),
-//       ),
-//     );
-//   }
-// }
-
