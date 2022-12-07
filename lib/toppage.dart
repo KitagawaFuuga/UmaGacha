@@ -6,10 +6,12 @@ import 'package:chewie/chewie.dart';
 import 'package:chewie/src/chewie_player.dart';
 import 'SingleGtya.dart';
 import 'Dialog.dart';
+import 'dart:io';
 
 class runGatya extends StatefulWidget {
+  File? image;
   late VideoPlayerController? movie;
-  runGatya({Key? key, required this.movie}) : super(key: key);
+  runGatya({Key? key, required this.movie,this.image}) : super(key: key);
 
   @override
   _runGatya createState() => _runGatya();
@@ -159,6 +161,7 @@ class _runGatya extends State<runGatya> {
                   color: Colors.blue,
                   height: Widht / 8,
                   width: Widht / 5,
+                  child: Image.asset('assets/images/public.jpg',fit: BoxFit.cover),
                 ),
             ],
           ),
@@ -177,10 +180,16 @@ class _runGatya extends State<runGatya> {
                       size: Widht / 5,
                       color: Colors.white,
                     ),
-                    Container(
-                      color: Colors.blue,
-                      height: Widht / 6,
-                      width: Widht / 2,
+                    Stack(
+                      children: [
+                        Container(
+                          color: Colors.blue,
+                          height: Widht / 6,
+                          width: Widht / 2,
+                          child: Image.file(widget.image!,fit: BoxFit.cover),
+                        ),
+                        Text('aaaaaaa',style: TextStyle(fontSize: 12))
+                      ]
                     ),
                     Icon(
                       Icons.chevron_right,
@@ -214,7 +223,7 @@ class _runGatya extends State<runGatya> {
                       ),
                       Container(
                         child: ElevatedButton(
-                          onPressed: () {singlegachaDialog(context,_videoPlayerController);},
+                          onPressed: () {singlegachaDialog(context,_videoPlayerController,widget.image);},
                           style: ElevatedButton.styleFrom(primary: dainyColor),
                           child: gotobotton(Widht / 4.3, Widht / 6,Widht / 3.9, '1日1回限定',"50")
                         ),
@@ -285,7 +294,7 @@ class _runGatya extends State<runGatya> {
                   Container(
                     margin: EdgeInsets.only(top: Widht / 12),
                     child: ElevatedButton(
-                      onPressed: () { tengachaDialog(_videoPlayerController,context); },
+                      onPressed: () { tengachaDialog(_videoPlayerController,context,widget.image); },
                       style: ElevatedButton.styleFrom(primary: Colors.green.shade400),
                       child: gotobotton(Widht / 4.3, Widht / 6, Widht / 3.9,  '10連引き!',"1500")
                     ),
@@ -293,7 +302,7 @@ class _runGatya extends State<runGatya> {
                   Container(
                     margin: EdgeInsets.only(top: Widht / 12),
                     child: ElevatedButton(
-                      onPressed: () { dailyDialog(context,_videoPlayerController); },
+                      onPressed: () { dailyDialog(context,_videoPlayerController,widget.image); },
                       style: ElevatedButton.styleFrom(primary: Colors.green.shade400),
                       child: gotobotton(Widht / 4.3, Widht / 6, Widht / 3.9,  '1回引く!',"150")
                     ),

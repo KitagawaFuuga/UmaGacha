@@ -15,44 +15,96 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   VideoPlayerController? _videoPlayerController;
+  File? _video;
   File? _image;
   final ImagePicker picker = ImagePicker();
+  bool ones = false;
+  bool imagechange = false;
+  bool videochange = false;
 
-  Future _getImage() async {
+  Future screenchange(VideoPlayerController? getVideo) async {
+    if(imagechange && videochange){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => runGatya(movie: getVideo,image: _image)),
+      );
+    }
+  }
+
+  Future _getVideo() async {
     final pickedFile = await picker.getVideo(source: ImageSource.camera);
 
     setState(() {
+      videochange = true;
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        _videoPlayerController = VideoPlayerController.file(_image!);
+        _video = File(pickedFile.path);
+        _videoPlayerController = VideoPlayerController.file(_video!);
+        screenchange(this._videoPlayerController);
       } else {
-        print('No image selected.');
+        print('No video selected.');
       }
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => runGatya(movie: _videoPlayerController)),
-    );
+  }
 
+  Future _getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      imagechange = true;
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        screenchange(_videoPlayerController);
+      } else {
+        print('No video selected.');
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    var deviceheight = MediaQuery.of(context).size.height;
+    var devicewidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
-        child: _videoPlayerController == null
-        ? const Text('No image selected.')
-        : AspectRatio(
-            aspectRatio: _videoPlayerController!.value.aspectRatio,
-            // 動画を表示
-            child: VideoPlayer(_videoPlayerController!),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _getImage();
-        },
-        child: const Icon(Icons.image),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('動画と写真を選択してください'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 10,top: 30),
+                  height: deviceheight * 0.08,
+                  width: devicewidth * 0.4,
+                  child: ElevatedButton(
+                    onPressed: () => {
+                      _getVideo(),
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: videochange ? Colors.red : Colors.blue                    
+                    ),
+                    child: Text('ビデオ選択'),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(right: 10,top: 30),
+                  height: deviceheight * 0.08,
+                  width: devicewidth * 0.4,
+                  child: ElevatedButton(
+                    onPressed: () => {
+                      _getImage(),
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: imagechange ? Colors.red : Colors.blue
+                    ),
+                    child: Text('写真選択'),
+                  ),
+                )
+              ],
+            )
+          ],
+        )
       ),
     );
   }
