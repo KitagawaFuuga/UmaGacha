@@ -4,10 +4,12 @@ import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:chewie/src/chewie_player.dart';
 import 'Dialog.dart';
+import 'dart:io';
 
 class tengacha extends StatefulWidget {
   VideoPlayerController? movie;
-  tengacha({Key? key, required this.movie}) : super(key: key);
+  File? image;
+  tengacha({Key? key, required this.movie,required this.image}) : super(key: key);
 
   @override
   _tengacha createState() => _tengacha();
@@ -153,7 +155,7 @@ class _tengacha extends State<tengacha> {
                       });
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => runGatya(movie: _videoPlayerController)),
+                        MaterialPageRoute(builder: (context) => runGatya(movie: _videoPlayerController,image: widget.image)),
                       );
                     },
                     style: ElevatedButton.styleFrom(primary: Colors.white),
@@ -179,7 +181,7 @@ class _tengacha extends State<tengacha> {
                         runGatya.yuusyou -= 1500;
                         _videoPlayerController = widget.movie!;
                       });
-                      tengachaDialog(_videoPlayerController, context);
+                      tengachaDialog(_videoPlayerController, context, widget.image!);
                     },
                     style: ElevatedButton.styleFrom(primary: Colors.green.shade400),
                     child: Container(
@@ -212,7 +214,7 @@ class _tengacha extends State<tengacha> {
           height: Widht / 5.5,
           width: Height / 8.5,
           color: Colors.red,
-          child: const Image(image: AssetImage('assets/images/ios-1.jpg')),
+          child: Image.file(widget.image!,fit: BoxFit.cover),
         ),
         Container(
           width: Widht / 5,

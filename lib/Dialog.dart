@@ -3,9 +3,10 @@ import 'package:video_player/video_player.dart';
 import 'toppage.dart';
 import 'SingleGtya.dart';
 import 'tengacha.dart';
+import 'dart:io';
 
 
-Future<void> singlegachaDialog(BuildContext context,VideoPlayerController? controller) async {
+Future<void> singlegachaDialog(BuildContext context,VideoPlayerController? controller, File? images) async {
   var Width = 390;
   return showDialog(
     context: context,
@@ -43,7 +44,7 @@ Future<void> singlegachaDialog(BuildContext context,VideoPlayerController? contr
                   runGatya.yuusyou -= 50;
                   runGatya.dainygatya = false;
                   Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => SingleGatya(movie: controller)),
+                    context, MaterialPageRoute(builder: (context) => SingleGatya(movie: controller, image: images)),
                   );
                 },
                 child: Container(
@@ -69,7 +70,7 @@ Future<void> singlegachaDialog(BuildContext context,VideoPlayerController? contr
   );
 }
 
-Future<void> tengachaDialog(VideoPlayerController? controller, BuildContext context) async {
+Future<void> tengachaDialog(VideoPlayerController? controller, BuildContext context, File? images) async {
   var Width = 390;
   return showDialog(
     context: context,
@@ -107,7 +108,7 @@ Future<void> tengachaDialog(VideoPlayerController? controller, BuildContext cont
                   runGatya.yuusyou -= 1500;
                   Navigator.push(
                     context,
-                    MaterialPageRoute( builder: (context) => tengacha(movie: controller))
+                    MaterialPageRoute( builder: (context) => tengacha(movie: controller,image:images))
                   );
                 },
                 child: Container(
@@ -133,7 +134,7 @@ Future<void> tengachaDialog(VideoPlayerController? controller, BuildContext cont
   );
 }
 
-Future<void> dailyDialog(BuildContext context, VideoPlayerController? controller ) async {
+Future<void> dailyDialog(BuildContext context, VideoPlayerController? controller ,File? images) async {
     var Width = 390;
     return showDialog(
       context: context,
@@ -169,7 +170,7 @@ Future<void> dailyDialog(BuildContext context, VideoPlayerController? controller
                   ),
                   onPressed: () {
                     runGatya.yuusyou -= 150;
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => SingleGatya(movie: controller)));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => SingleGatya(movie: controller,image: images)));
                   },
                   child: Container(
                     alignment: Alignment.bottomCenter,

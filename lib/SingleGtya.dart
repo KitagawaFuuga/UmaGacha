@@ -4,10 +4,12 @@ import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:chewie/src/chewie_player.dart';
 import 'tengacha.dart';
+import 'dart:io';
 
 class SingleGatya extends StatefulWidget {
   VideoPlayerController? movie;
-  SingleGatya({Key? key, required this.movie}) : super(key: key);
+  File? image;
+  SingleGatya({Key? key, required this.movie,required this.image}) : super(key: key);
 
   @override
   _SingleGatya createState() => _SingleGatya();
@@ -186,7 +188,7 @@ class _SingleGatya extends State<SingleGatya> {
         Container(
           height: Widht / 6,
           width: Widht / 4,
-          child: const Image(image: AssetImage('assets/images/ios-1.jpg')),
+          child: Image.file(widget.image!,fit: BoxFit.cover),
         ),
         Container(
           width: Widht / 5,
@@ -262,7 +264,7 @@ class _SingleGatya extends State<SingleGatya> {
                     setState(() {runGatya.yuusyou -= 150;});
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SingleGatya(movie: widget.movie)),
+                      MaterialPageRoute(builder: (context) => SingleGatya(movie: widget.movie,image: widget.image)),
                     );
                   },
 
